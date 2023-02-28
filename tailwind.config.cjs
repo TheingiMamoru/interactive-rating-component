@@ -16,6 +16,9 @@ module.exports = {
         'medium-gray':'hsl(216, 12%, 24%)',
         'dark-blue':'hsl(213, 19%, 18%)',
         'very-dark-blue':'hsl(216, 12%, 8%)',
+      },
+      animation:{
+        'spin-slow':'spin 3s linear infinite'
       }
     },
   },
