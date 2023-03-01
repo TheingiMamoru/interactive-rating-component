@@ -1,16 +1,29 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 // import { ReactSVG } from 'react-svg'
 
 const Feedback = () => {
     const [rate, setRate] = useState('')
     // console.log(rate);
 
+    const [toggle, setToggle] = useState(false)
+
     const handleClick = (e) =>{
         setRate(e.target.innerText)
     }
+
+    const navigate = useNavigate()
+
+    const handleSubmit = () => {
+        if (rate !== '') {
+            setToggle(!toggle)
+            setTimeout(()=> navigate(`thankyou/${rate}`), 500)
+            
+        }
+    }
+    console.log(toggle);
   return (
-    <div className='flex flex-col gap-3 w-[400px] h-fit rounded-[30px] shadow-xl p-[35px] bg-dark-blue'>
+    <div className={`${toggle && `animate__animated animate__fadeOutDown` } flex flex-col gap-3 w-[400px] h-fit rounded-[30px] shadow-xl p-[35px] bg-dark-blue`} >
         <div className=' flex w-[45px] h-[45px] bg-medium-gray rounded-full items-center justify-center mb-5'>
             <svg width="17" height="16" xmlns="http://www.w3.org/2000/svg"><path d="m9.067.43 1.99 4.031c.112.228.33.386.58.422l4.45.647a.772.772 0 0 1 .427 1.316l-3.22 3.138a.773.773 0 0 0-.222.683l.76 4.431a.772.772 0 0 1-1.12.813l-3.98-2.092a.773.773 0 0 0-.718 0l-3.98 2.092a.772.772 0 0 1-1.119-.813l.76-4.431a.77.77 0 0 0-.222-.683L.233 6.846A.772.772 0 0 1 .661 5.53l4.449-.647a.772.772 0 0 0 .58-.422L7.68.43a.774.774 0 0 1 1.387 0Z" fill="#FC7614"/></svg>
         </div>
@@ -40,10 +53,8 @@ const Feedback = () => {
                 5
             </div>
         </div>
-        <div>
-            <Link to={`thankyou/${rate}`} className='grid'>
-                <button className='bg-orange text-white p-3 rounded-full tracking-widest hover:text-orange hover:bg-white'>SUBMIT</button>
-            </Link>
+        <div className='grid'>
+            <button onClick={handleSubmit} className='bg-orange text-white p-3 rounded-full tracking-widest hover:text-orange hover:bg-white'>SUBMIT</button>
         </div>
     </div>
   )
